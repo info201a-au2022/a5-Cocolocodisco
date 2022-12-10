@@ -99,16 +99,20 @@ output$intro_text7 <- renderText({
 })
 
 
-# output a bar graph of average co2 emissions across for inputted country, color the bars red
+# output a bar graph of average co2 emissions across for inputted country, input slider year range
 
 output$bar_graph <- renderPlotly({
     dataset %>% 
         filter(country == input$country) %>% 
-        ggplot(aes(x = year, y = co2, fill = country)) +
-        geom_bar(stat = "identity") +
-        scale_fill_manual(values = "red") +
-        labs(title = "Average CO2 Emissions Across Countries in years", x = "Year", y = "CO2 Emissions (metric tons per capita)") +
+        filter(year >= input$year[1]) %>% 
+        filter(year <= input$year[2]) %>% 
+        ggplot(aes(x = year, y = co2, color = year)) + 
+        geom_bar(stat = "identity") + 
+        labs(title = "Average CO2 Emissions Across Years", x = "Year", y = "CO2 Emissions (metric tons per capita)") + 
         theme(plot.title = element_text(hjust = 0.5))
 })
-}
 
+
+
+
+}

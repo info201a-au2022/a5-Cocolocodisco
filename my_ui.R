@@ -15,26 +15,30 @@ intro_bar <- tabPanel(
     h3("CO2 Emissions data in country United States, Canada, China, India, and Russia"),
     #put the image on the left side of the page and the text, and textOutput on the right side of the page
     fluidRow(
-        column(6, offset = 0, h4("CO2 Emissions are the amount of carbon dioxide released into the atmosphere by human activities. Through years of burning fossil fuels, humans have increased the amount of carbon dioxide in the atmosphere. This has led to global warming and climate change. The data below shows the CO2 emissions information for the United States, Canada, China, India, and Russia from 1960 to 2020. ")
+        column(6, offset = 0, h4("CO2 Emissions are the amount of carbon dioxide released into the atmosphere by human activities. Through years of burning fossil fuels, humans have increased the amount of carbon dioxide in the atmosphere. This has led to global warming and climate change."),
+        h5("The data below shows the CO2 emissions information for the United States, Canada, China, India, and Russia from 1960 to 2020. ")
         , textOutput ("intro_text1"), textOutput ("intro_text2"), textOutput ("intro_text3"), textOutput ("intro_text4"), textOutput ("intro_text5"), textOutput ("intro_text6"), textOutput ("intro_text7" )),
         column(6, offset = 0, img(src = "https://d2jx2rerrg6sh3.cloudfront.net/image-handler/ts/20201211042210/ri/1000/picture/2020/12/shutterstock_772541140.jpg", width = "100%"))
     )
 )
 
 
-# Bar graph tab for selected country from United States, Canada, China, India, and Russia
+# Bar graph tab for selected country from United States, Canada, China, India, and Russia, and the year range slider from 1960 to 2020 in the sidebarPanel
+
 
 bar_tab <- tabPanel(
     "Bar Graph",
     sidebarLayout(
         sidebarPanel(
             selectInput("country", "Select a country", choices = c("United States", "Canada", "China", "India", "Russia")),
+            sliderInput("year", "Year Range", min = 1960, max = 2020, value = c(1960, 2020))
         ),
         mainPanel(
             plotlyOutput("bar_graph"),
         )
     )
 )
+
 
 
 # Create the UI for the application and add the tabs
